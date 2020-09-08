@@ -129,7 +129,50 @@ Finishing installation ...
 
 2. 访问 web
 
-```
+
+获取到服务器ID：`BJI3-ARJG-WP8Y-CKVQ`
+
+#### 破解 Conflucence
+
+1. 停止服务
 
 ```
+~]# cd /opt/atlassian/confluence/bin/ && ./shutdown.sh
+```
+
+2. 将atlassian-extras-decoder-v2-3.4.1.jar拷贝到自己的电脑上并进行重命名为atlassian-extras-2.4.jar
+
+```
+~]# cd /opt/atlassian/confluence/confluence/WEB-INF/lib/
+lib]# sz atlassian-extras-decoder-v2-3.4.1.jar
+```
+
+3. 将该 `.jar` 文件跟破解工具放在一起，然后运行破解工具 
+
+
+
+#### 配置数据库
+
+1. 安装数据库驱动
+
+```
+~]# wget https://cdn.mysql.com//Downloads/Connector-J/mysql-connector-java-5.1.48.tar.gz
+~]# tar -xf mysql-connector-java-5.1.48.tar.gz
+~]# cp mysql-connector-java-5.1.48/*.jar /opt/atlassian/confluence/confluence/WEB-INF/lib
+```
+
+2. 重启服务
+
+```
+~]# /opt/atlassian/confluence/bin/shutdown.sh 
+~]# /opt/atlassian/confluence/bin/startup.sh
+```
+
+
+
+
+
+
+
+
 
