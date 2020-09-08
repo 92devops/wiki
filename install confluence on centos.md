@@ -76,13 +76,13 @@ mysql> flush privileges;
 
 #### 安装  Confluence
 
-1. 安装 
+1. 安装
 
 ```
 ~]#  wget https://product-downloads.atlassian.com/software/confluence/downloads/atlassian-confluence-7.2.0-x64.bin
-~]# chmod  +x atlassian-confluence-7.2.0-x64.bin 
+~]# chmod  +x atlassian-confluence-7.2.0-x64.bin
 ~]# ./atlassian-confluence-7.2.0-x64.bin
-~]# ./atlassian-confluence-7.2.0-x64.bin 
+~]# ./atlassian-confluence-7.2.0-x64.bin
 Unpacking JRE ...
 Starting Installer ...
 
@@ -93,22 +93,22 @@ Click Next to continue, or Cancel to exit Setup.
 
 Choose the appropriate installation or upgrade option.
 Please choose one of the following:
-Express Install (uses default settings) [1], 
-Custom Install (recommended for advanced users) [2, Enter], 
+Express Install (uses default settings) [1],
+Custom Install (recommended for advanced users) [2, Enter],
 Upgrade an existing Confluence installation [3]
 1
 
 See where Confluence will be installed and the settings that will be used.
-Installation Directory: /opt/atlassian/confluence 
-Home Directory: /var/atlassian/application-data/confluence 
-HTTP Port: 8090 
-RMI Port: 8000 
-Install as service: Yes 
+Installation Directory: /opt/atlassian/confluence
+Home Directory: /var/atlassian/application-data/confluence
+HTTP Port: 8090
+RMI Port: 8000
+Install as service: Yes
 Install [i, Enter], Exit [e]
 i
 
 Extracting files ...
-                                                                           
+
 
 Please wait a few moments while we configure Confluence.
 
@@ -129,6 +129,7 @@ Finishing installation ...
 
 2. 访问 web
 
+![](./images/1-access_web.png)
 
 获取到服务器ID：`BJI3-ARJG-WP8Y-CKVQ`
 
@@ -140,18 +141,31 @@ Finishing installation ...
 ~]# cd /opt/atlassian/confluence/bin/ && ./shutdown.sh
 ```
 
-2. 将atlassian-extras-decoder-v2-3.4.1.jar拷贝到自己的电脑上并进行重命名为atlassian-extras-2.4.jar
+2. 将atlassian-extras-decoder-v2-3.4.1.jar从 wiki 服务器拷贝到本地机器上并进行重命名为atlassian-extras-2.4.jar
 
 ```
-~]# cd /opt/atlassian/confluence/confluence/WEB-INF/lib/
-lib]# sz atlassian-extras-decoder-v2-3.4.1.jar
+$ scp 172.18.0.14:/opt/atlassian/confluence/confluence/WEB-INF/lib/atlassian-extras-decoder-v2-3.4.1.jar ./atlassian-extras-2.4.jar
 ```
 
-3. 将该 `.jar` 文件跟破解工具放在一起，然后运行破解工具 
+
+3. 将该 `.jar` 文件跟破解工具放在一起，然后运行破解工具
+
+```
+$ java -jar confluenc_keygen.jar
+```
+先点击 `.gen`, 在点击 `patch`, 选择要破解的文件(即从服务器copy下来的 jar 文件)破解
+
+![](./images/2-crack.png)
+
+完成后，破解复制Key到Confluence里，然后点击下一步
+
+![](images/7.png)
 
 
 
 #### 配置数据库
+
+![](images/8.png)
 
 1. 安装数据库驱动
 
@@ -164,15 +178,10 @@ lib]# sz atlassian-extras-decoder-v2-3.4.1.jar
 2. 重启服务
 
 ```
-~]# /opt/atlassian/confluence/bin/shutdown.sh 
+~]# /opt/atlassian/confluence/bin/shutdown.sh
 ~]# /opt/atlassian/confluence/bin/startup.sh
 ```
 
+![](images/9.png)
 
-
-
-
-
-
-
-
+测试连接成功后，点击下一步，耐心等待安装完成
